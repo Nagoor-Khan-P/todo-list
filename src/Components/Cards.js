@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import EditTask from "../modals/EditTask";
 
-export default function Cards({taskObj, index, deleteTask}) {
+export default function Cards({taskObj, index, deleteTask, updateTaskList}) {
 
     const [modal, setModal]=useState(false);
     const status = () => setModal(!modal);
@@ -37,8 +37,8 @@ export default function Cards({taskObj, index, deleteTask}) {
         }
     ]
 
-    const handleUpdate =() => {
-
+    const handleUpdate =(taskObj) => {
+        updateTaskList(taskObj,index);
     }
 
     const handleDelete = () => {
@@ -46,7 +46,7 @@ export default function Cards({taskObj, index, deleteTask}) {
     }
 
   return (
-    <div class="card-wrapper me-4 ms-4">
+    <div class="card-wrapper me-4 ms-4 mt-3">
       <div
         class="card-top"
         style={{ "background-color": colors[index % 7].primaryColor }}
@@ -79,7 +79,7 @@ export default function Cards({taskObj, index, deleteTask}) {
       <EditTask
         modal={modal}
         status={status}
-        handleUpdate={handleUpdate}
+        update={handleUpdate}
         taskObj={taskObj}
       />
     </div>
