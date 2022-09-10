@@ -1,15 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Tasks from "../modals/Tasks";
+import Cards from "./Cards";
 
 export default function Todolist() {
   const [modal, setModal] = useState(false);
   const status = () => setModal(!modal);
+
+  useEffect(() => {
+    let tasks=localStorage.getItem("taskContainer");
+    
+    // if obj is not undefined
+    if(tasks){
+        let obj=JSON.parse(tasks);
+        setTaskContainer(obj);
+    }
+  }, [])
 
   const [taskContainer, setTaskContainer] = useState([]);
 
   const addTask = (taskObj) => {
     let tempList = taskContainer;
     tempList.push(taskObj);
+    localStorage.setItem("taskContainer",JSON.stringify(tempList));
     console.log(taskObj);
     setTaskContainer(tempList);
     setModal(false);
@@ -30,9 +42,9 @@ export default function Todolist() {
         </div>
       </div>
       {/* task container */}
-      <div className="container-lg">
-        {taskContainer.map((obj) => (
-          <li>{obj.Title}</li>
+      <div className="task-container container-lg">
+        {taskContainer.map((obj, index) => (
+          <Cards taskObj={obj} index={index}/>
         ))}
       </div>
       <Tasks modal={modal} status={status} add={addTask} />
