@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
+import EditTask from "../modals/EditTask";
 
 export default function Cards({taskObj, index, deleteTask}) {
+
+    const [modal, setModal]=useState(false);
+    const status = () => setModal(!modal);
 
     const colors = [
         {
@@ -33,6 +37,10 @@ export default function Cards({taskObj, index, deleteTask}) {
         }
     ]
 
+    const handleUpdate =() => {
+
+    }
+
     const handleDelete = () => {
         deleteTask(index);
     }
@@ -59,7 +67,7 @@ export default function Cards({taskObj, index, deleteTask}) {
           <i
             class="far fa-edit me-3"
             style={{ color: colors[index % 7].primaryColor, cursor: "pointer" }}
-            // onClick={() => setModal(true)}
+            onClick={() => setModal(true)}
           ></i>
           <i
             class="fas fa-trash-alt"
@@ -68,12 +76,12 @@ export default function Cards({taskObj, index, deleteTask}) {
           ></i>
         </div>
       </div>
-      {/* <EditTask
+      <EditTask
         modal={modal}
-        toggle={toggle}
-        updateTask={updateTask}
+        status={status}
+        handleUpdate={handleUpdate}
         taskObj={taskObj}
-      /> */}
+      />
     </div>
   );
 }
