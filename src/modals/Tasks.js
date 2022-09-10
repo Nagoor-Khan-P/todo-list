@@ -1,25 +1,64 @@
-import React from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import React, { useState } from "react";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
-export default function Tasks({modal,toggle}) {
+export default function Tasks({ modal, status }) {
+    const [taskName,setTaskName]=useState('');
+    const [desc,setDesc] =useState('');
+
+    const handleChange = (e) => {
+        const name=e.target.name;
+        const value=e.target.value;
+
+        if(name == 'title'){
+            setTaskName(value);
+        }
+        else{
+            setDesc(value);
+        }
+    }
+
   return (
     <div>
-        <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+      <Modal isOpen={modal} status={status}>
+        <ModalHeader status={status}>Add a Task</ModalHeader>
         <ModalBody>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut.
+          <form class="row g-3">
+            <div class="mb-3">
+              <label for="title" class="form-label">
+                Task Title
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="title"
+                name="title"
+                value={taskName}
+                placeholder="Add Title" onChange={handleChange}
+              ></input>
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlTextarea1" class="form-label">
+                Description
+              </label>
+              <textarea
+                class="form-control"
+                id="description"
+                name="description"
+                value={desc} onChange={handleChange}
+                rows="3"
+              ></textarea>
+            </div>
+          </form>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={toggle}>
-            Do Something
-          </Button>{' '}
-          <Button color="secondary" onClick={toggle}>
+          <Button color="success" onClick={status}>
+            Add
+          </Button>{" "}
+          <Button color="danger" onClick={status}>
             Cancel
           </Button>
         </ModalFooter>
       </Modal>
     </div>
-  )
+  );
 }
