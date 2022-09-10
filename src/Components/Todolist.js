@@ -25,6 +25,7 @@ export default function Todolist() {
     console.log(taskObj);
     setTaskContainer(tempList);
     setModal(false);
+    window.location.reload();
   };
 
   const deleteTask =(index) => {
@@ -45,12 +46,14 @@ export default function Todolist() {
 
   return (
     <>
-      <div className="container-fluid text-center my-3 bg-secondary">
+      <div className="container-fluid text-center my-3 bg-secondary  rounded-5">
+        
         {/* header container */}
         <div className="container-lg">
-          <h1 className="display-5 text-warning">Todo List Application</h1>
+        
+          <h1 className="display-5 text-warning"> <span><i class="fa-solid fa-list"></i></span> Todo List Application</h1>
           <button
-            className="btn btn-danger my-3"
+            className="btn btn-warning my-3"
             onClick={() => setModal(true)}
           >
             Add Task
