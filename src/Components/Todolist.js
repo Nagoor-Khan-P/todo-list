@@ -4,6 +4,15 @@ import Tasks from "../modals/Tasks";
 export default function Todolist() {
     const [modal,setModal]=useState(false);
     const status = () => setModal(!modal);
+
+    const [taskContainer, setTaskContainer] = useState([]);
+
+    const addTask = (taskObj) => {
+        let tempList=taskContainer;
+        tempList.push(taskObj);
+        taskContainer=tempList;
+    }
+
   return (
     <div className="container-fluid text-center my-3 bg-secondary">
         {/* header container */}
@@ -15,7 +24,7 @@ export default function Todolist() {
       <div className="container-lg">
 
       </div>
-      <Tasks modal={modal}status={status}/>
+      <Tasks modal={modal}status={status} add={addTask}/>
     </div>
   );
 }

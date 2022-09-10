@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
-export default function Tasks({ modal, status }) {
+export default function Tasks({ modal, status, add}) {
     const [taskName,setTaskName]=useState('');
     const [desc,setDesc] =useState('');
 
@@ -15,6 +15,13 @@ export default function Tasks({ modal, status }) {
         else{
             setDesc(value);
         }
+    }
+
+    const handleSave = () => {
+        let taskObj={};
+        taskObj["Name"]=taskName;
+        taskObj["Desc"]=desc;
+        add(taskObj);
     }
 
   return (
@@ -51,7 +58,7 @@ export default function Tasks({ modal, status }) {
           </form>
         </ModalBody>
         <ModalFooter>
-          <Button color="success" onClick={status}>
+          <Button color="success" onClick={handleSave}>
             Add
           </Button>{" "}
           <Button color="danger" onClick={status}>
