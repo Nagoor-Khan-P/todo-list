@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Cards({taskObj, index}) {
+export default function Cards({taskObj, index, deleteTask}) {
 
     const colors = [
         {
@@ -22,20 +22,32 @@ export default function Cards({taskObj, index}) {
         {
             primaryColor : "#B964F7",
             secondaryColor : "#F3F0FD"
+        },
+        {
+            primaryColor : "#f5078e",
+            secondaryColor : "#dbc8d7"
+        },
+        {
+            primaryColor : "#09cee8",
+            secondaryColor : "#d3e1e3"
         }
     ]
 
+    const handleDelete = () => {
+        deleteTask(index);
+    }
+
   return (
-    <div class="card-wrapper me-3">
+    <div class="card-wrapper me-4 ms-4">
       <div
         class="card-top"
-        style={{ "background-color": colors[index % 5].primaryColor }}
+        style={{ "background-color": colors[index % 7].primaryColor }}
       ></div>
       <div class="task-holder">
         <span
           class="card-header"
           style={{
-            "background-color": colors[index % 5].secondaryColor,
+            "background-color": colors[index % 7].secondaryColor,
             "border-radius": "10px",
           }}
         >
@@ -45,14 +57,14 @@ export default function Cards({taskObj, index}) {
 
         <div style={{ position: "absolute", right: "20px", bottom: "20px" }}>
           <i
-            class="far fa-edit mr-3"
-            style={{ color: colors[index % 5].primaryColor, cursor: "pointer" }}
+            class="far fa-edit me-3"
+            style={{ color: colors[index % 7].primaryColor, cursor: "pointer" }}
             // onClick={() => setModal(true)}
           ></i>
           <i
             class="fas fa-trash-alt"
-            style={{ color: colors[index % 5].primaryColor, cursor: "pointer" }}
-            // onClick={handleDelete}
+            style={{ color: colors[index % 7].primaryColor, cursor: "pointer" }}
+            onClick={handleDelete}
           ></i>
         </div>
       </div>

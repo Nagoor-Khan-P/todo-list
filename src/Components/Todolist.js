@@ -27,6 +27,14 @@ export default function Todolist() {
     setModal(false);
   };
 
+  const deleteTask =(index) => {
+    let tempList=taskContainer;
+    tempList.splice(index,1);
+    localStorage.setItem("taskContainer",JSON.stringify(tempList));
+    setTaskContainer(tempList);
+    window.location.reload();
+  }
+
   return (
     <>
       <div className="container-fluid text-center my-3 bg-secondary">
@@ -42,9 +50,9 @@ export default function Todolist() {
         </div>
       </div>
       {/* task container */}
-      <div className="task-container container-lg">
+      <div className="task-container container-lg ">
         {taskContainer.map((obj, index) => (
-          <Cards taskObj={obj} index={index}/>
+          <Cards taskObj={obj} index={index} deleteTask={deleteTask}/>
         ))}
       </div>
       <Tasks modal={modal} status={status} add={addTask} />
